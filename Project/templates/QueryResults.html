@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Queries</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            background-color: #141414;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 60px;
+            margin: 50px 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff
+        }
+
+        table {
+            margin: 20px auto;
+            color: #ffffff;
+            border-collapse: collapse;
+            background-color: #333333;
+            width: 70%;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #444444;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e50914;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        caption {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        a {
+            color: #e50914;
+            font-size: 22px;
+            text-decoration: none;
+            margin: 10px 20px;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        .links {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Query Results</h1>
+
+<table>
+    <caption>Query 1</caption>
+    <tr>
+        <th>Genre</th>
+        <th>Number Of Movies</th>
+        <th>Average Rating</th>
+    </tr>
+    {% for content in sql_res1 %}
+        <tr>
+            <td>{{ content.genre }}</td>
+            <td>{{ content.NumberOfMoviesInGenre }}</td>
+            <td>{{ content.AverageRating }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<table>
+    <caption>Query 2</caption>
+    <tr>
+        <th>Actor Name</th>
+        <th>Number of Movies</th>
+    </tr>
+    {% for content in sql_res2 %}
+        <tr>
+            <td>{{ content.aName }}</td>
+            <td>{{ content.NumberOfMoviesPlayed }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<table>
+    <caption>Query 3</caption>
+    <tr>
+        <th>Country</th>
+        <th>User ID</th>
+    </tr>
+    {% for content in sql_res3 %}
+        <tr>
+            <td>{{ content.country }}</td>
+            <td>{{ content.uID }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="links">
+    <a href="index.html">Home</a>
+    <a href="AddActorToMovie.html">Add Actor to Movie</a>
+    <a href="RecordWatching.html">Record Watching</a>
+</div>
+
+</body>
+</html>

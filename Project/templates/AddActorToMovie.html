@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Actor to Movie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            background-color: #141414;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 60px;
+            margin: 50px 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff
+        }
+
+        form {
+            margin: 40px auto;
+            display: inline-block;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 20px;
+            margin-right: 10px;
+            width: 120px; /* Adjust this width as needed */
+        }
+
+        textarea, input[type="number"] {
+            width: 300px;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #e50914;
+            border-radius: 4px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #f40612;
+        }
+
+        table {
+            margin: 40px auto;
+            border-collapse: collapse;
+            background-color: #1c1c1c;
+            width: 60%;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #e50914;
+            font-weight: 700;
+        }
+
+        caption {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .links {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .links a {
+            color: #e50914;
+            font-size: 25px;
+            text-decoration: none;
+            margin: 10px 20px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<h1>Add Actor to Movie</h1>
+
+<form method="POST" action="AddActorToMovie.html">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="actorName">Actor Name:</label>
+        <textarea id="actorName" name="name" rows="1" cols="50" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="movieTitle">Movie Title:</label>
+        <textarea id="movieTitle" name="title" rows="1" cols="50" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" min="0" required>
+    </div>
+    <div class="submit-container">
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+<br><br>
+{% if error_message %}
+    <p style="color: #e50914; font-size: 20px;"><b>{{ error_message }}</b></p>
+{% elif success_message %}
+    <p style="color: #1e9056; font-size: 20px;"><b>The record was successfully added to the movie!</b></p>
+{% endif %}
+
+<table>
+    <caption>Last 5 Movies</caption>
+    <tr>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Release Date</th>
+    </tr>
+    {% for content in latest_movies %}
+        <tr>
+            <td>{{ content.title }}</td>
+            <td>{{ content.genre }}</td>
+            <td>{{ content.releaseDate }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<div class="links">
+    <a href="index.html">Home</a>
+    <a href="QueryResults.html">Query Results</a>
+    <a href="RecordWatching.html">Record Watching</a>
+</div>
+
+</body>
+</html>

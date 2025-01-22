@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record Watching</title>
+    <!-- Link to Google Fonts for consistent design -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+</head>
+<body style="background-color: #0a0a0a; text-align: center; margin-top: 10px; color: #f0f0f0; font-family: 'Roboto', sans-serif;">
+
+<!-- Title with Netflix-inspired font -->
+<h1 style="color: #e50914; font-family: 'Roboto', sans-serif; font-size: 60px; margin-top: 50px; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">Record Watching</h1>
+
+<form method="POST" style="text-align: center; margin: 40px auto; display: inline-block; color: #f0f0f0;" action= "RecordWatching.html">
+    {% csrf_token %}
+
+    <!-- User ID Section -->
+    <div style="margin-bottom: 20px;">
+        <label style="display: inline-block; font-size: 20px; text-align: left; width: 150px;">User ID:</label>
+        <select name="id" required style="display: inline-block; width: 300px; padding: 10px; background-color: #333; color: #f0f0f0; border: 1px solid #e50914; border-radius: 4px; font-size: 18px;">
+            <option value="" disabled selected>Select a user</option>
+            {% for user in all_users %}
+                <option value="{{ user.uID }}">{{ user.uID }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Movie Title Section -->
+    <div style="margin-bottom: 20px;">
+        <label style="display: inline-block; font-size: 20px; text-align: left; width: 150px;">Movie Title:</label>
+        <select name="title" required style="display: inline-block; width: 300px; padding: 10px; background-color: #333; color: #f0f0f0; border: 1px solid #e50914; border-radius: 4px; font-size: 18px;">
+            <option value="" disabled selected>Select a movie</option>
+            {% for movie in all_movies %}
+                <option value="{{ movie.title }}">{{ movie.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Watching Date Section -->
+    <div style="margin-bottom: 20px;">
+        <label style="display: inline-block; font-size: 20px; text-align: left; width: 150px;">Watching Date:</label>
+        <input type="date" name="date" required style="display: inline-block; width: 300px; padding: 10px; background-color: #333; color: #f0f0f0; border: 1px solid #e50914; border-radius: 4px; font-size: 18px;">
+    </div>
+
+    <!-- Rating Section -->
+    <div style="margin-bottom: 20px;">
+        <label style="display: inline-block; font-size: 20px; text-align: left; width: 150px;">Rating:</label>
+        <span style="display: inline-block;">
+            <input type="radio" name="rating" value="1" required> 1
+            <input type="radio" name="rating" value="2"> 2
+            <input type="radio" name="rating" value="3"> 3
+            <input type="radio" name="rating" value="4"> 4
+            <input type="radio" name="rating" value="5"> 5
+        </span>
+    </div>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Submit" style="font-size: 18px; padding: 10px 20px; background-color: #e50914; color: white; border: none; border-radius: 5px; cursor: pointer;">
+</form>
+
+<br><br>
+{% if error_message %}
+    <p style="color: #e50914; font-size: 20px;"><b>{{ error_message }}</b></p>
+{% elif success_message %}
+    <p style="color: #1e9056; font-size: 20px;"><b>The record was successfully added to Watching!</b></p>
+{% endif %}
+
+<!-- Navigation Links -->
+<div class="links" style="margin-top: 50px; display: flex; justify-content: center;">
+    <a href="index.html" style="color: #e50914; font-size: 25px; text-decoration: none; margin: 10px 20px; transition: color 0.3s ease;">Home</a>
+    <a href="AddActorToMovie.html" style="color: #e50914; font-size: 25px; text-decoration: none; margin: 10px 20px; transition: color 0.3s ease;">Add Actor to Movie</a>
+    <a href="QueryResults.html" style="color: #e50914; font-size: 25px; text-decoration: none; margin: 10px 20px; transition: color 0.3s ease;">Query Results</a>
+</div>
+
+</body>
+</html>
